@@ -1,9 +1,9 @@
-function consola_general(){
+function consulta_general(){
     let url = "http://127.0.0.1:5000/";
     fetch (url)
     .then( response => response.json())
-    .then( response => visualizar(data) )
-    .catch(Error=> console.log(Error) )
+    .then( data => visualizar(data))
+    .catch(Error=> console.log(Error))
     const visualizar = (data) => {
         console.log(data)
         let b = ""
@@ -11,11 +11,11 @@ function consola_general(){
             console.log(i,data.baul[i].Plataforma)
             console.log(i,data.baul[i].usuario)
             console.log(i,data.baul[i].clave)
-            b+=`<tr><td>${data.baul[i].id_baul}</td><td>${data.baul[i].Plataforma}</td><td>${data.baul[i].usuario}</td><td>${data.baul[i].clave}</td>
-            <td><button type='button' class="btn btn-info" onclick="location.href = 'edit.html?variable1=${data.baul[i].id_baul}'"> <img src='imagenes/edit.png' height ='30' width='30'/></button>
-            <button type='button' class="btn btn-warning" onclick="eliminar(${data.baul[i].id_baul})"> <img src='imagenes/delete.png' height ='30' width='30'/></button></tr>`   
+            b += `<tr><td>${data.baul[i].id_baul}</td><td>${data.baul[i].Plataforma}</td><td>${data.baul[i].usuario}</td><td>${data.baul[i].clave}</td>
+            <td><button type='button' class="btn btn-info" onclick="location.href = 'edit.html?variable1=${data.baul[i].id_baul}'"> <img src="img/edit.png" alt=""/> </button>
+            <button type='button' class="btn btn-warning" onclick="eliminar(${data.baul[i].id_baul})"> <img src="img/dad.png" alt=""/> </button></tr>`   
             }
-            document.getElementById('data').innerHTML
+            document.getElementById('data').innerHTML = b
         }
 }
 
@@ -47,7 +47,7 @@ function registrar(){
         method: "POST", // or 'PUT'
         body: JSON.stringify(data), // data can be 'string' or {object}!
         headers: {
-            "content-type": "aplication/json",
+            "content-type": "application/json",
         },
     })
 
@@ -74,7 +74,7 @@ function consulta_individual(id) {
         // document.getElementById("idbaul").value=data.baul[i].id_baul
         document.getElementById("plataforma").value=data.baul.plataforma
         document.getElementById("usuario").value=data.baul.usuario
-        document.getElementById("clave").value.data.baul.clave
+        document.getElementById("clave").value=data.baul.clave
     }
 }
 
@@ -92,9 +92,9 @@ function modificar(id){
 console.log(data)
 fetch(url,{
     method: "PUT", //or 'PUT'
-    body: JSON.stringify(dat), //data can be 'string' or {objrt}!
+    body: JSON.stringify(data), //data can be 'string' or {objrt}!
     headers: {
-        "content-pype": "aplication/json",
+        "content-Type": "application/json",
     },
  })
     .then((res) => res.json())
